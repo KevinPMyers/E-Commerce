@@ -1,9 +1,16 @@
 const router = require('express').Router();
+const { response } = require('express');
 const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
 router.get('/', (req, res) => {
+  Tag.findAll()
+  .then(response => res.json(response))
+  .catch(err => {
+    console.log(err);
+    res.status(400).json(err);
+  })
   // find all tags
   // be sure to include its associated Product data
 });
@@ -26,3 +33,5 @@ router.delete('/:id', (req, res) => {
 });
 
 module.exports = router;
+
+// done
