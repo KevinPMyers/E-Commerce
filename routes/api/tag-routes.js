@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    include: [Product, ProductTag]
+    include: [{ all: true, nested: true }]
 
   }).then(response => res.json(response))
   .catch(err => {
@@ -52,8 +52,8 @@ router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
   Tag.update(req.body, {
     where: {
-      id: req.params.id,
-      tag_name: req.params.tag_name
+      id: req.params.id
+      
     }
   }).then(response => res.json(response))
   .catch(err => {
